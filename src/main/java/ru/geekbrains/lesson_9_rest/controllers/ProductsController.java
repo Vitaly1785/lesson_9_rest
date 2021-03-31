@@ -6,6 +6,7 @@ import ru.geekbrains.lesson_9_rest.dto.ProductDto;
 import ru.geekbrains.lesson_9_rest.models.Product;
 import ru.geekbrains.lesson_9_rest.services.ProductService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -35,12 +36,12 @@ public class ProductsController {
     }
 
     @PostMapping
-    public Product saveProduct(@RequestBody ProductDto productDto) {
+    public Product saveProduct(@RequestBody @Valid ProductDto productDto) {
         return productService.createProduct(productDto);
     }
 
     @PutMapping
-    public Product updateProduct(@RequestBody ProductDto productDto) {
+    public Product updateProduct(@RequestBody @Valid ProductDto productDto) {
         return productService.updateProduct(productDto);
     }
 
