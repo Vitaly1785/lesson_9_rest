@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson_9_rest.services;
+package ru.geekbrains.lesson_9_rest.services.product;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
