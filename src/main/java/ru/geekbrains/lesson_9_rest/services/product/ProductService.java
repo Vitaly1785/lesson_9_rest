@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson_9_rest.services;
+package ru.geekbrains.lesson_9_rest.services.product;
 
 import ru.geekbrains.lesson_9_rest.dto.ProductDto;
 import ru.geekbrains.lesson_9_rest.models.Product;

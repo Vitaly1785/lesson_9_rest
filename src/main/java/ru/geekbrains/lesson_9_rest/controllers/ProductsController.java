@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
 import ru.geekbrains.lesson_9_rest.dto.ProductDto;
 import ru.geekbrains.lesson_9_rest.models.Product;
-import ru.geekbrains.lesson_9_rest.services.ProductService;
+import ru.geekbrains.lesson_9_rest.services.product.ProductService;
 
 import javax.validation.Valid;
 import java.util.List;

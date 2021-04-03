@@ -1,5 +1,7 @@
 package ru.geekbrains.lesson_9_rest.models;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,8 +11,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+    @ApiModelProperty("The database generated product ID")
     private Long id;
+    @ApiModelProperty("The title of the product")
     private String title;
+    @ApiModelProperty("Price of the product")
     private int price;
 
     public Product() {
@@ -44,4 +49,5 @@ public class Product {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }
