@@ -1,5 +1,7 @@
 package ru.geekbrains.lesson_9_rest.services.product;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.lesson_9_rest.dao.ProductDao;
@@ -66,5 +68,32 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         productDao.delete(productDao.findById(id).orElseThrow(() -> new ProductNotFoundException(String.format("Product was not deleted. Product with id %s not found", id))));
+    }
+
+    @Override
+    @Transactional
+    public Page<Product> getProductsMinPrice(Pageable pageable){
+        return productDao.findAllByOrderByPriceDesc(pageable);
+    }
+
+    @Override
+    public Page<Product> showAll(Pageable pageable) {
+        return productDao.findAll(pageable);
+    }
+
+    @Override
+    public void updateProductById(Product product, Long id) {
+        Optional<Product> updatableProduct = productDao.findById(id);
+        if (updatableProduct.isPresent()) {
+            updatableProduct.get().setPrice(product.getPrice());
+            updatableProduct.get().setTitle(product.getTitle());
+            productDao.save(updatableProduct.get());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Page<Product> getProductMaxPrice(Pageable pageable){
+        return productDao.findAllByOrderByPriceAsc(pageable);
     }
 }

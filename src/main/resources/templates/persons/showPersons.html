@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Products</title>
+    <style>
+        .pagination-div span{border-radius:3px;border:1px solid #999;
+            background-color: yellowgreen;
+            padding:5px;margin:10px 0px 0px 10px;display:inline-block}
+        span.selected{background:#ccf;}
+    </style>
+</head>
+
+<body>
+<table border="2px" width="400px" bgcolor="#9acd32">
+    <thead>
+    <tr>
+        <th style="width: 40%">Person</th>
+        <th style="width: 20%">Action</th>
+    </tr>
+    </thead>
+    <tr th:each="person: ${persons}">
+        <td><a th:href="@{/persons/{id}(id=${person.getId()})}"
+               th:text="${person.getName()}">person</a></td>
+        <td align="center">
+            <form th:method="DELETE" th:action="@{/persons/{id}(id=${person.getId()})}">
+                <input type="submit" value="Delete Person">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<br/>
+<hr/>
+<a th:href="@{/persons/new}">Add new Person</a>
+
+</body>
+</html>
