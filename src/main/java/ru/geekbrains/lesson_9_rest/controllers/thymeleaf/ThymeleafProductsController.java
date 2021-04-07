@@ -23,7 +23,7 @@ public class ThymeleafProductsController {
 
     @GetMapping
     public String showAll(@PageableDefault(size = 10) Pageable pageable,
-                          Model model){
+                          Model model) {
         Page<Product> page = sortProduct(pageable);
         model.addAttribute("page", page);
 //        model.addAttribute("sort", sortMethod);
@@ -31,38 +31,43 @@ public class ThymeleafProductsController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable("id") Long id, Model model){
+    public String findById(@PathVariable("id") Long id, Model model) {
         model.addAttribute("product", productService.findById(id));
         return "products/id";
     }
+
     @GetMapping("/new")
-    public String newProduct(Model model){
+    public String newProduct(Model model) {
         model.addAttribute("product", new Product());
         return "products/new";
     }
+
     @PostMapping
-    public String addProduct(@ModelAttribute("product") ProductDto productDto){
+    public String addProduct(@ModelAttribute("product") ProductDto productDto) {
         productService.createProduct(productDto);
         return "redirect:/products";
     }
+
     @GetMapping("/{id}/edit")
-    public String editProduct(Model model, @PathVariable("id") long id){
+    public String editProduct(Model model, @PathVariable("id") long id) {
         model.addAttribute("product", productService.findById(id));
         return "products/edit";
     }
+
     @PatchMapping("/{id}")
-    public String updateProductById(@ModelAttribute("product") Product product, @PathVariable Long id){
-       productService.updateProductById(product, id);
+    public String updateProductById(@ModelAttribute("product") Product product, @PathVariable Long id) {
+        productService.updateProductById(product, id);
         return "redirect:/products";
     }
+
     @DeleteMapping("/{id}")
-    public String deleteProduct(@PathVariable("id") Long id){
+    public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProduct(id);
         return "redirect:/products";
     }
 
     @PostMapping("/{sorted}")
-    public String getSortMethod(@PathVariable("sorted") String sorted){
+    public String getSortMethod(@PathVariable("sorted") String sorted) {
         sortMethod = sorted;
         return "redirect:/products";
     }
@@ -70,18 +75,18 @@ public class ThymeleafProductsController {
     public Page<Product> sortProduct(Pageable pageable) {
         Page<Product> products = null;
 
-                switch (sortMethod) {
-                    case "ASC":
-                        products = productService.getProductMaxPrice(pageable);
-                        break;
-                    case "DESC":
-                        products = productService.getProductsMinPrice(pageable);
-                        break;
-                    default:
-                        products = productService.showAll(pageable);
-                        break;
-                }
-        return products;
+        switch (sortMethod) {
+            case "ASC":
+                products = productService.getProductMaxPrice(pageable);
+                break;
+            case "DESC":
+                products = productService.getProductsMinPrice(pageable);
+                break;
+            default:
+                products = productService.showAll(pageable);
+                break;
         }
+        return products;
     }
+}
 

@@ -15,40 +15,45 @@ public class ThymeleafPersonsController {
     public ThymeleafPersonsController(PersonService personService) {
         this.personService = personService;
     }
+
     @GetMapping
-    public String showAll(Model model){
+    public String showAll(Model model) {
         model.addAttribute("persons", personService.findAll());
         return "/persons/showPersons";
     }
+
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id, Model model){
+    public String findById(@PathVariable Long id, Model model) {
         model.addAttribute("person", personService.findById(id));
         return "/persons/idPerson";
     }
+
     @GetMapping("/new")
-    public String newPerson(Model model){
+    public String newPerson(Model model) {
         model.addAttribute("person", new Person());
         return "/persons/newPerson";
     }
+
     @PostMapping
-    public String addPerson(@ModelAttribute("person") PersonDto personDto){
+    public String addPerson(@ModelAttribute("person") PersonDto personDto) {
         personService.createPerson(personDto);
         return "redirect:/persons";
     }
 
     @GetMapping("/{id}/edit")
-    public String editPerson(@PathVariable Long id, Model model){
+    public String editPerson(@PathVariable Long id, Model model) {
         model.addAttribute("person", personService.findById(id));
         return "/persons/editPerson";
     }
+
     @PatchMapping("/{id}")
-    public String updatePerson(@ModelAttribute("person") PersonDto personDto, @PathVariable Long id){
+    public String updatePerson(@ModelAttribute("person") PersonDto personDto, @PathVariable Long id) {
         personService.updatePerson(personDto, id);
         return "redirect:/persons";
     }
 
     @DeleteMapping("/{id}")
-    public String deletePerson(@PathVariable Long id){
+    public String deletePerson(@PathVariable Long id) {
         personService.deletePerson(id);
         return "redirect:/persons";
     }

@@ -1,7 +1,7 @@
 package ru.geekbrains.lesson_9_rest.models;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Table(name = "person")
@@ -11,11 +11,14 @@ public class Person {
     @Column
     private Long id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+    private String login;
+    private String password;
 
     public Person() {
     }
-
-
 
     public Person(String name) {
         this.name = name;
@@ -37,4 +40,27 @@ public class Person {
         this.name = name;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

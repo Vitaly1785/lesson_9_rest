@@ -21,12 +21,9 @@
     </thead>
     <tr th:each="person: ${persons}">
         <td><a th:href="@{/persons/{id}(id=${person.getId()})}"
-               th:text="${person.getName()}">person</a></td>
-        <td align="center">
-            <form th:method="DELETE" th:action="@{/persons/{id}(id=${person.getId()})}">
-                <input type="submit" value="Delete Person">
-            </form>
+               th:text="${person.getName()}">person</a>
         </td>
+        <td th:text="${person.getRole()}">role</td>
     </tr>
 </table>
 

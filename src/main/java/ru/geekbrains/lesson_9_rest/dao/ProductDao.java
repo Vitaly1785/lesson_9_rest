@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public interface ProductDao extends CrudRepository<Product, Long> {
     Optional<Product> findProductByTitle(String title);
+
     Page<Product> findAllByOrderByPriceAsc(Pageable pageable);
-    Page<Product>findAllByOrderByPriceDesc(Pageable pageable);
+
+    Page<Product> findAllByOrderByPriceDesc(Pageable pageable);
+
     Page<Product> findAll(Pageable pageable);
 }

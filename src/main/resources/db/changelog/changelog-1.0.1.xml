@@ -190,4 +190,23 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
             <column name="name" value="George"/>
         </insert>
     </changeSet>
+    <changeSet id="create_table_roles" author="v.petukhov">
+        <createTable tableName="role">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="change_person_for_security" author="v.petukhov">
+        <addColumn tableName="person">
+            <column name="role_id" type="UUID">
+                <constraints foreignKeyName="fk_role" references="role(id)"/>
+            </column>
+            <column name="login" type="varchar(64)"/>
+            <column name="password" type="varchar(64)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
