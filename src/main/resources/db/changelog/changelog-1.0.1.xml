@@ -132,7 +132,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
             <column name="price" value="18"/>
         </insert>
     </changeSet>
-    <changeSet id="create_table" author="v.petukhov">
+    <changeSet id="create_table_person" author="v.petukhov">
         <createTable tableName="person">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -189,5 +189,24 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
         <insert tableName="person">
             <column name="name" value="George"/>
         </insert>
+    </changeSet>
+    <changeSet id="create_table_roles" author="v.petukhov">
+        <createTable tableName="role">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="change_person_for_security" author="v.petukhov">
+        <addColumn tableName="person">
+            <column name="role_id" type="UUID">
+                <constraints foreignKeyName="fk_role" references="role(id)"/>
+            </column>
+            <column name="login" type="varchar(64)"/>
+            <column name="password" type="varchar(64)"/>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>
