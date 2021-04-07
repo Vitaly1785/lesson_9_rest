@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/geekbrains?serverTimezone=Europe/Moscow
-    username: root
-    password: jpwv8zcm17VNP
+    url: jdbc:postgresql://localhost:5432/geekbrains
+    username: postgres
+    password: user
   jpa:
     show-sql: true
   liquibase:

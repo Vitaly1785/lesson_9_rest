@@ -132,7 +132,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd"
             <column name="price" value="18"/>
         </insert>
     </changeSet>
-    <changeSet id="create_table" author="v.petukhov">
+    <changeSet id="create_table_person" author="v.petukhov">
         <createTable tableName="person">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
